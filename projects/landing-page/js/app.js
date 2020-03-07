@@ -17,7 +17,7 @@
  * Define Global Variables
  *
 */
-
+var isScrolling;
 
 /**
  * End Global Variables
@@ -25,7 +25,26 @@
  *
 */
 
+//Check if scrolling has stopped
+function isNotScrolling() {
+  let navMenu = document.querySelector(".page__header");
+  console.log(navMenu);
+  //navMenu.style.top = "0";
+  navMenu.classList.remove("hideNav");
 
+  // Clear our timeout throughout the scroll
+	window.clearTimeout( isScrolling );
+
+	// Set a timeout to run after scrolling ends
+	isScrolling = setTimeout(function() {
+
+		// Run the callback
+		console.log( 'Scrolling has stopped.' );
+    //navMenu.style.top = "-60px";
+    navMenu.classList.add("hideNav");
+
+	}, 2000);
+}
 
 /**
  * End Helper Functions
@@ -33,7 +52,7 @@
  *
 */
 document.addEventListener("DOMContentLoaded", createNavigationMenu);
-window.addEventListener("scroll", scrollSection)
+window.addEventListener("scroll", scrollSection);
 
 // build the nav
 function createNavigationMenu(){
@@ -54,7 +73,28 @@ function createNavigationMenu(){
 }
 
 function scrollSection(event) {
-  console.log("scrollSection event")
+  console.log("scrollSection event");
+  const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+  // console.log("scrollSection event", windowHeight, document.documentElement.scrollTop);
+  if (document.documentElement.scrollTop > windowHeight) {
+    console.log("below page fold");
+    document.querySelector(".topButton").style.visibility = "visible";
+  }
+  else {
+    document.querySelector(".topButton").style.visibility = "hidden";
+  }
+  //Check if scrolling has stoppped
+  isNotScrolling();
+  // let navMenu = document.querySelector("navbar__menu");
+  // if (isNotScrolling()) {
+  //   console.log("Hide");
+  //   navMenu.style.top = "-50px";
+  // }
+  // else {
+  //   console.log("Show");
+  //   navMenu.style.top = "0";
+  // }
+
   let elmSections = document.querySelectorAll("section");
   for (sec of elmSections) {
     // isCloseToViewPort(sec);
@@ -64,6 +104,11 @@ function scrollSection(event) {
     }
     else {
       sec.classList.remove("clsActive");
+      //When no section is active or at the top of the page, remove active menu link class
+      if (document.documentElement.scrollTop == 0) {
+        let activeLink = document.querySelector(".menu__link__active");
+        activeLink.classList.remove("menu__link__active");
+      }
     }
   }
 }
@@ -81,18 +126,21 @@ function isCloseToViewPort(elm)
 {
   let viewportOffset = elm.getBoundingClientRect();
 // these are relative to the viewport, i.e. the window
-  let top = viewportOffset.top;
-  let left = viewportOffset.left;
-  let right = viewportOffset.right;
-  let bottom = viewportOffset.bottom;
+  const top = viewportOffset.top;
+  const left = viewportOffset.left;
+  const right = viewportOffset.right;
+  const bottom = viewportOffset.bottom;
+  // const height = viewportOffset.height;
+  // const width = viewportOffset.width;
+  const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+  const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
 
   console.log(elm.id, top, left);
-  // if (top <= 50) {
   if (
-	top >= 0 &&
+	top >= -50 &&
 	left >= 0 &&
-	right <= (window.innerWidth || document.documentElement.clientWidth) &&
-	bottom <= (window.innerHeight || document.documentElement.clientHeight)
+	right <= (windowWidth) &&
+	bottom <= (windowHeight)
 ) {
     // console.log("Inside ");
     // activeSection(el, "#"+el.id);
@@ -101,6 +149,14 @@ function isCloseToViewPort(elm)
   else {
     return false;
   }
+
+  //
+  //
+  // // http://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
+  // var vertInView = (top <= windowHeight) && ((top + height) >= 0);
+  // var horInView = (left <= windowWidth) && ((left + width) >= 0);
+  //
+  // return (vertInView && horInView);
 }
 
 //Set Link as active
@@ -117,6 +173,9 @@ function activeLink(linkToActivate, bg) {
   }
 }
 
+function scrollTopClick() {
+  document.documentElement.scrollTop = 0;
+}
 // Scroll to anchor ID using scrollTO event
 
 
