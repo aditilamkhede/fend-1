@@ -112,6 +112,7 @@ section {
   opacity: 1;
 }
 
+/* Hide Navigation Bar */
 .hideNav {
   top: -60px;
   transition: 0.3s;

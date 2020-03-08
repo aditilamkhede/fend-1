@@ -85,20 +85,9 @@ function scrollSection(event) {
   }
   //Check if scrolling has stoppped
   isNotScrolling();
-  // let navMenu = document.querySelector("navbar__menu");
-  // if (isNotScrolling()) {
-  //   console.log("Hide");
-  //   navMenu.style.top = "-50px";
-  // }
-  // else {
-  //   console.log("Show");
-  //   navMenu.style.top = "0";
-  // }
 
   let elmSections = document.querySelectorAll("section");
   for (sec of elmSections) {
-    // isCloseToViewPort(sec);
-    //if (sec.id == event.target.location.hash.slice(1)) {
     if (isCloseToViewPort(sec)) {
       activeSection(sec, "#"+sec.id);
     }
@@ -142,21 +131,11 @@ function isCloseToViewPort(elm)
 	right <= (windowWidth) &&
 	bottom <= (windowHeight)
 ) {
-    // console.log("Inside ");
-    // activeSection(el, "#"+el.id);
     return true;
   }
   else {
     return false;
   }
-
-  //
-  //
-  // // http://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
-  // var vertInView = (top <= windowHeight) && ((top + height) >= 0);
-  // var horInView = (left <= windowWidth) && ((left + width) >= 0);
-  //
-  // return (vertInView && horInView);
 }
 
 //Set Link as active
