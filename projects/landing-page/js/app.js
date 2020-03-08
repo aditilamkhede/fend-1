@@ -96,7 +96,9 @@ function scrollSection(event) {
       //When no section is active or at the top of the page, remove active menu link class
       if (document.documentElement.scrollTop == 0) {
         let activeLink = document.querySelector(".menu__link__active");
-        activeLink.classList.remove("menu__link__active");
+        if (activeLink) {
+          activeLink.classList.remove("menu__link__active");
+        }
       }
     }
   }
