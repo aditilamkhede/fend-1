@@ -28,7 +28,7 @@ var isScrolling;
 //Check if scrolling has stopped
 function isNotScrolling() {
   let navMenu = document.querySelector(".page__header");
-  console.log(navMenu);
+  // console.log(navMenu);
   //navMenu.style.top = "0";
   navMenu.classList.remove("hideNav");
 
@@ -39,7 +39,7 @@ function isNotScrolling() {
 	isScrolling = setTimeout(function() {
 
 		// Run the callback
-		console.log( 'Scrolling has stopped.' );
+		// console.log( 'Scrolling has stopped.' );
     //navMenu.style.top = "-60px";
     navMenu.classList.add("hideNav");
 
@@ -73,11 +73,11 @@ function createNavigationMenu(){
 }
 
 function scrollSection(event) {
-  console.log("scrollSection event");
+  // console.log("scrollSection event");
   const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
   // console.log("scrollSection event", windowHeight, document.documentElement.scrollTop);
   if (document.documentElement.scrollTop > windowHeight) {
-    console.log("below page fold");
+    // console.log("below page fold");
     document.querySelector(".topButton").style.visibility = "visible";
   }
   else {
@@ -126,7 +126,7 @@ function isCloseToViewPort(elm)
   const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
   const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
 
-  console.log(elm.id, top, left);
+  // console.log(elm.id, top, left);
   if (
 	top >= -50 &&
 	left >= 0 &&
@@ -171,11 +171,11 @@ function scrollTopClick() {
 // Scroll to section on link click
 function menuLinkOnClick(e) {
   const strSec = e.target.hash.slice(1);
-  console.log("In CLick Event", strSec);
+  // console.log("In CLick Event", strSec);
   e.preventDefault();
   let secToActivate = document.getElementById(strSec);
   secToActivate.scrollIntoView({block: "center"});
-  console.log("Before", secToActivate,
-    secToActivate.scrollTop, secToActivate.scrollLeft);
+  // console.log("Before", secToActivate,
+  //   secToActivate.scrollTop, secToActivate.scrollLeft);
 }
 // Set sections as active
