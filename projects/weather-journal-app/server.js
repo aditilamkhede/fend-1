@@ -36,7 +36,7 @@ function getWeather(req, res){
 }
 
 //Post Route
-const data = [];
+// const data = [];
 app.post('/weather', postWeather);
 
 function postWeather(req, res){
@@ -45,4 +45,6 @@ function postWeather(req, res){
   projectData['temperature'] = req.body['temperature'];
   projectData['date'] = req.body['date'];
   projectData['userip'] = req.body['userip'];
+
+  res.send(projectData);
 }

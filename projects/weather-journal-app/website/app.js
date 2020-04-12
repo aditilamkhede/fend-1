@@ -16,12 +16,13 @@ function generateOnClick(e) {
   if (zip === "" || zip === null) {
     console.log("Please enter valid zip code.");
     var errorElm = document.getElementById('error');
-    errorElm.innerHTML = "Please enter valid zip code.";
-    errorElm.style.display = "block";
+    errorElm.innerHTML = 'Please enter valid zip code.';
+    // errorElm.style.display = "block";
     return;
   }
   else {
-    document.getElementById('error').style.display = "none";
+    // document.getElementById('error').style.display = "none";
+    document.getElementById('error').innerHTML = '';
   }
   const userResponse = document.getElementById('feelings').value;
   getWeatherData(apiBaseURL, zip, country, appID)
@@ -30,8 +31,9 @@ function generateOnClick(e) {
     let date = new Date(data.dt * 1000);
     postWeatherData('/weather', {temperature: data.main.temp, date: date.toLocaleDateString(), userip: userResponse});
   })
-  .then(
-    updateWeatherUI()
+  .then(function() {
+    updateWeatherUI();
+  }
   );
   // console.log('data', data);
 }
@@ -52,6 +54,7 @@ const getWeatherData = async(baseUrl, zip, country, key) => {
 
 //post request
 const postWeatherData = async(url='', data={}) => {
+  // console.log("In Post 1", url, data);
   const res = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
@@ -63,6 +66,7 @@ const postWeatherData = async(url='', data={}) => {
 
   try {
     const newData = await res.json();
+    // console.log("In post data", newData);
     return newData;
   } catch (e) {
     console.log('Error', e);
@@ -71,11 +75,9 @@ const postWeatherData = async(url='', data={}) => {
 
 // update UI with weather database
 const updateWeatherUI = async() => {
-  console.log('in Update UI');
   const req = await fetch('/all');
   try {
     const data = await req.json();
-    console.log(data);
     document.getElementById('date').innerHTML = data.date;
     document.getElementById('temp').innerHTML = data.temperature;
     document.getElementById('content').innerHTML = data.userip;

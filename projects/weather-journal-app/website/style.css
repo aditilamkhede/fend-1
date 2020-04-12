@@ -5,98 +5,133 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    grid-template-rows: minmax(10vh, auto) minmax(20vh, auto) minmax(30vh, auto) minmax(40vh, auto);
+    /* grid-auto-rows: minmax(150px, auto); */
     /* grid-template-columns:  */
-    height:100vh;
-    background: #8f00f8;
-    color: #f0d43a;
+    height: 100vh;
+    width: 60vw;
+
+    color: white;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: #8f00f8;
+}
+
 .holder{
   display: flex;
+  flex-direction: column;
 }
 
 .entry{
     background: rgba(59, 74, 107, .4);
+    align-self: flex-start;
+    flex-direction: column;
 }
 
 #entryHolder{
-
+  width: 60vw;
+  height: 20vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* width: 70%; */
+  /* flex-direction: column;
+  align-items: flex-start; */
+  justify-content: space-between;
+  margin: 0 10px 0 10px;
 }
 
 #date{
-
+ /* align-self: flex-start; */
 }
 
 #temp{
-
+  /* align-self: flex-start; */
 }
 
 #content{
-
+  /* align-self: flex-start; */
+  overflow-wrap: break-word;
 }
 
 .headline {
-
+  font-size: 36px;
+  margin-bottom: 55px;
+  color: yellow;
 }
-.title{
-
+.title h4 {
+  margin-top: 0;
+  text-align: center;
 }
 .error {
+  /* display: none; */
   width: 90%;
-  height: 10px;
-  /* padding: 50px 0; */
-  text-align: center;
-  /* background-color: yellow; */
-  /* margin-top: 20px; */
+  height: 10vh;
+  color: yellow;
+}
+
+.feel {
+
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
-    display:block;
-    font-size: 27px;
+    height: 10vh;
+    display: block;
+    font-size: 20px;
 }
 
 input{
-    display:block;
-    height: 60px;
-    width: 320px;
-    background:#22b2da;
+    display: block;
+    height: 15vh;
+    width: 40vw;
+    /* background: #22b2da; */
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
+    border-radius: 10px;
 }
 
 button{
-    width: 400px;
-    height: 100px;
+    width: 20vw;
+    height: 60px;
     background: #3b4a6b;
     color: #f0d43a;
-    font-size: 26px;
+    font-size: 25px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 h1{
     font-size: 36px;
 }
 
 textarea{
-    background:#22b2da;
+    width: 40vw;
+    height: 100vh;
+    /* background: #22b2da; */
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    border-radius: 10px;
+    border: none;
 }
 /* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+input: focus,
+select: focus,
+textarea: focus,
+button: focus {
     outline: none;
 }
 /* Style for Placeholder Text*/
