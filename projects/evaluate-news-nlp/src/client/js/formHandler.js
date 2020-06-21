@@ -13,19 +13,29 @@ function handleSubmit(event) {
     // fetch('http://localhost:8080/test')
 
     var urldata = {nlpurl: formText};
+    // get_update_nlp();
+    console.log("::: Calling get_update_nlp changed :::")
+    const get_update_nlp = async() => {
+      console.log('Inside get_update_nlp');
+      let postData = await postnlpdata('http://localhost:8081/nlpapi', urldata);
+      let getData = await getNlpData('http://localhost:8081/nlpapi', urldata);
+      console.log('getData', getData);
+      await updateUI(getData);
+      // postnlpdata('http://localhost:8081/nlpapi', urldata)
+      // .then(function(data){
+      //   console.log('inside then', data);
+      //   // let strLabel = data[0]['label']
+      //   // console.log('In Response Data Label - ', strLabel);
+      //   alert('post response Data - '+ data);
+      //   getNlpData('http://localhost:8081/nlpapi', urldata)
+      //   .then(function(data) {
+      //     console.log(data);
+      //     updateUI(data);
+      //   })
+      // });
+    }
 
-    postnlpdata('http://localhost:8081/nlpapi', urldata)
-    .then(function(data){
-      console.log('inside then', data);
-      // let strLabel = data[0]['label']
-      // console.log('In Response Data Label - ', strLabel);
-      alert('post response Data - '+ data);
-      getNlpData('http://localhost:8081/nlpapi', urldata)
-      .then(function(data) {
-        console.log(data);
-        updateUI(data);
-      })
-    });
+    get_update_nlp();
     // fetch('/nlpapi', {
     //   method: 'POST',
     //   credentials: 'same-origin',
@@ -40,9 +50,7 @@ function handleSubmit(event) {
     //     document.getElementById('results').innerHTML = res.message
     // })
 }
-
-function updateUI(result)
-{
+const updateUI = async(result) => {
   try {
     // document.getElementById('results').innerHTML = result.categories[0]['label'];
     document.getElementById('urlImage').src = result.image;
@@ -57,12 +65,12 @@ const getNlpData = async(baseUrl, data) => {
   console.log('in getNlpData', data);
   // const wURL = apiBaseURL+'?appid='+key;
   const wURL = baseUrl;
-  console.log('url', wURL);
+  // console.log('url', wURL);
   const res = await fetch(wURL, data);
   try {
-    console.log('Try getNlpData', res);
+    // console.log('Try getNlpData', res);
     const rsdata = await res.json();
-    console.log('Data getNlpData', rsdata);
+    // console.log('Data getNlpData', rsdata);
     return rsdata;
   } catch(ex) {
     console.log('Error in getNlpData', ex);
