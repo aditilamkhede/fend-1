@@ -16,23 +16,23 @@ function handleSubmit(event) {
     // get_update_nlp();
     console.log("::: Calling get_update_nlp changed :::")
     const get_update_nlp = async() => {
-      console.log('Inside get_update_nlp');
-      let postData = await postnlpdata('http://localhost:8081/nlpapi', urldata);
-      let getData = await getNlpData('http://localhost:8081/nlpapi', urldata);
-      console.log('getData', getData);
-      await updateUI(getData);
-      // postnlpdata('http://localhost:8081/nlpapi', urldata)
-      // .then(function(data){
-      //   console.log('inside then', data);
-      //   // let strLabel = data[0]['label']
-      //   // console.log('In Response Data Label - ', strLabel);
-      //   alert('post response Data - '+ data);
-      //   getNlpData('http://localhost:8081/nlpapi', urldata)
-      //   .then(function(data) {
-      //     console.log(data);
-      //     updateUI(data);
-      //   })
-      // });
+      // console.log('Inside get_update_nlp');
+      // let postData = await postnlpdata('http://localhost:8081/nlpapi', urldata);
+      // let getData = await getNlpData('http://localhost:8081/nlpapi', urldata);
+      // console.log('getData', getData);
+      // await updateUI(getData);
+      postnlpdata('http://localhost:8081/nlpapi', urldata)
+      .then(function(){
+        console.log('inside then');
+        // let strLabel = data[0]['label']
+        // console.log('In Response Data Label - ', strLabel);
+        alert('post response Data - ');
+        getNlpData('http://localhost:8081/nlpapi', urldata)
+        .then(function(data) {
+          console.log(data);
+          updateUI(data);
+        })
+      });
     }
 
     get_update_nlp();
@@ -98,4 +98,4 @@ const postnlpdata = async(url='', data={}) => {
   }
 }
 
-export { handleSubmit }
+export { handleSubmit, postnlpdata }
