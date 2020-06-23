@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+var projectData = {};
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -122,3 +122,5 @@ app.post('/nlpapi', function (req, res) {
       }
     });
 })
+
+export { app };
