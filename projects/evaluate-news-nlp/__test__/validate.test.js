@@ -14,11 +14,11 @@ test('validates url', () => {
   expect(validateURL('http://www.google.com')).toBe(true);
 })
 
-test('testing post nlp data', async () => {
+test('testing post nlp data', async (done) => {
   // expect.assertions(1);
   const data = await nlpapi.postnlpdata(url, urldata);
-  console.log('data - ', data['categories']['code']);
-  expect(data['categories']['code']).toBe('007');
+  console.log('data.categories[0].code - ', data.categories[0]['code']);
+  await expect(data.categories[0]['code']).toBe('04016029');
   // await expect(postnlpdata(url, urldata)).resolves.toEqual('Paul');
   // await expect(nlpapi.postnlpdata(url, urldata)).resolves.toEqual('Paul');
   done();

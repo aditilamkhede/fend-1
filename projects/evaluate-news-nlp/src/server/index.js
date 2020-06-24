@@ -113,7 +113,7 @@ app.post('/nlpapi', function (req, res) {
       // console.log(`Your API key is ${process.env.API_KEY}`);
       // console.log("Inside nplapi", error);
       if (error === null) {
-        console.log('response', response);
+        // console.log('response', response);
         response['categories'].forEach(function(c) {
           console.log('post', c);
           projectData['categories'] = response['categories'];
@@ -123,4 +123,22 @@ app.post('/nlpapi', function (req, res) {
     });
 })
 
-export { app };
+app.post('/nlpapi/extract', function (req, res) {
+    console.log('Post extract', req.body);
+    projectData['nlpurl'] = req.body.nlpurl;
+
+    nplapi.extract({
+      url: projectData['nlpurl'],
+      best_image: true
+    }, function(error, response) {
+      if (error === null) {
+        console.log(response);
+        projectData['image'] = response['image'];
+        projectData['author'] = response['author'];
+        projectData['title'] = response['title'];
+        res.send(projectData);
+      }
+    });
+})
+
+module.exports = { app };
