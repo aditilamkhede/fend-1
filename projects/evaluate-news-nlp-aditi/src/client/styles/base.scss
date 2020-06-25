@@ -1,3 +1,5 @@
+$section-width: 800px;
+
 body {
     display: flex;
     flex-direction: column;
@@ -9,6 +11,10 @@ main {
 }
 
 section {
-    max-width: 800px;
+    max-width: $section-width;
     margin: 50px auto;
+}
+
+section h3 {
+  font-size: 20px;
 }

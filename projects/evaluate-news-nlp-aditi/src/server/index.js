@@ -124,7 +124,7 @@ app.post('/nlpapi', function (req, res) {
 })
 
 app.post('/nlpapi/extract', function (req, res) {
-    console.log('Post extract', req.body);
+    // console.log('Post extract', req.body);
     projectData['nlpurl'] = req.body.nlpurl;
 
     nplapi.extract({
@@ -132,7 +132,7 @@ app.post('/nlpapi/extract', function (req, res) {
       best_image: true
     }, function(error, response) {
       if (error === null) {
-        console.log(response);
+        // console.log(response);
         projectData['image'] = response['image'];
         projectData['author'] = response['author'];
         projectData['title'] = response['title'];

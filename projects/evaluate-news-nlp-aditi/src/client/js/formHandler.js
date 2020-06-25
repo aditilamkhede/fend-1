@@ -23,17 +23,19 @@ function handleSubmit(event) {
       // let getData = await getNlpData('http://localhost:8081/nlpapi', urldata);
       // console.log('getData', getData);
       // await updateUI(getData);
-      postnlpdata('http://localhost:8081/nlpapi', urldata)
-      .then(function(){
+      postnlpdata('http://localhost:8081/nlpapi/extract', urldata)
+      .then(function(data){
         console.log('inside then');
         // let strLabel = data[0]['label']
         // console.log('In Response Data Label - ', strLabel);
-        alert('post response Data - ');
-        getNlpData('http://localhost:8081/nlpapi', urldata)
-        .then(function(data) {
-          console.log(data);
-          updateUI(data);
-        })
+        alert('post response Data - ', data);
+        // console.log(data);
+        updateUI(data);
+        // getNlpData('http://localhost:8081/nlpapi', urldata)
+        // .then(function(data) {
+        //   console.log(data);
+        //   updateUI(data);
+        // })
       });
     }
 
@@ -54,9 +56,8 @@ function handleSubmit(event) {
 }
 const updateUI = async(result) => {
   try {
-    // document.getElementById('results').innerHTML = result.categories[0]['label'];
     document.getElementById('urlImage').src = result.image;
-    document.querySelector('#title p:nth-child(2)').innerHTML = result.title;
+    document.querySelector('#title p:nth-child(2)').innerText = result.title;
     document.querySelector('#author p:nth-child(2)').innerHTML = result.author;
   } catch (e) {
     console.log("updateUI Error - ", e);
@@ -64,15 +65,12 @@ const updateUI = async(result) => {
 }
 //get request to get nlp data
 const getNlpData = async(baseUrl, data) => {
-  console.log('in getNlpData', data);
-  // const wURL = apiBaseURL+'?appid='+key;
+  // console.log('in getNlpData', data);
   const wURL = baseUrl;
-  // console.log('url', wURL);
   const res = await fetch(wURL, data);
   try {
     // console.log('Try getNlpData', res);
     const rsdata = await res.json();
-    // console.log('Data getNlpData', rsdata);
     return rsdata;
   } catch(ex) {
     console.log('Error in getNlpData', ex);

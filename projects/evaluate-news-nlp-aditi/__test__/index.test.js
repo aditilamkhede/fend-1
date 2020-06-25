@@ -11,7 +11,7 @@ const urldata = {nlpurl: 'http://techcrunch.com/2015/07/16/microsoft-will-never-
 
 describe('Tests server NLP endpoints', () => {
   // const port = 7007;
-  let appServer;
+  // let appServer;
   // beforeAll(async (done) => {
   //   // server = app.listen(4000, () => {
   //   //   global.agent = request.agent(server);
@@ -29,6 +29,19 @@ describe('Tests server NLP endpoints', () => {
   //   await appServer.close(done);
   // });
 
+  let req = null
+  let server = null
+
+  beforeAll(async function(done){
+    server = await app.listen(done);
+    req = request.agent(server);
+    done();
+  });
+
+  afterAll(async function(done){
+    return await server && server.close(done);
+  });
+
   it('should test get endoint', async(done) => {
     const res = await request(app).get('/test');
     expect(res.statusCode).toEqual(200);
@@ -39,11 +52,11 @@ describe('Tests server NLP endpoints', () => {
 
   it('should test nlpapi post endpoint', async(done) => {
     const res = await request(app)
-      .post('/nlpapi')
+      .post('/nlpapi/extract')
       .send(urldata);
     // console.log('post - ', res.body);
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('categories');
+    expect(res.body).toHaveProperty('image');
     done();
   });
 
