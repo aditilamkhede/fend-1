@@ -34,9 +34,15 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
+//For Heroku comment this
 // designates what port the app will listen to for incoming requests
 app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
+})
+
+//For Heroku uncomment this
+app.listen(process.env.PORT || 5000, function () {
+    console.log('Example app listening on port 5000!')
 })
 
 app.get('/test', function (req, res) {
